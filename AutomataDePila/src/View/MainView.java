@@ -184,4 +184,22 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
     public boolean comprobarCadenaPar(String palabraIngresada){
         return palabraIngresada.length() % 2 == 0;
     }
+    
+    public boolean automataDePila(String palabraIngresada){
+        boolean C3 = false;
+        boolean esPalindromo = true;
+        int i = 0;
+        
+        while(esPalindromo && i < palabraIngresada.length()){
+            if(palabraIngresada.charAt(i) != palabraIngresada.charAt((palabraIngresada.length() - 1) - i)){
+               esPalindromo = false;
+               C3 = false;
+               break;  
+            }
+           i++;
+        }
+        
+        return C3; //Tercera Condicion
+    }
+    
 }
