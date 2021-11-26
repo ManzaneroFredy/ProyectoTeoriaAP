@@ -2,6 +2,8 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -162,7 +164,7 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
 
     private void btnProbarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProbarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
-        modelo.addRow(new Object[]{"s","abba","vacio",""});
+        modelo.addRow(new Object[]{"s","abba",'\u0190'});
     }//GEN-LAST:event_btnProbarActionPerformed
 
 
