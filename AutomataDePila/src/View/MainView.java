@@ -198,8 +198,46 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
         Object evt = e.getSource();
         if(evt.equals(btnProbar)){
             palabraProbar = txtCadena.getText();
-            
+            boolean C1 = false; // Primera comprobación
+            String cadenaIngresada = txtCadena.getText();
+            C1 = comprobarCadenaPar(cadenaIngresada);
             System.out.println(palabraProbar);
         }
     }
+    
+    public boolean comprobarCadenaPar(String palabraIngresada){
+        return palabraIngresada.length() % 2 == 0;
+    }
+    
+    public boolean automataDePila(String palabraIngresada){
+        boolean C3 = false;
+        boolean esPalindromo = true;
+        int i = 0;
+        
+        while(esPalindromo && i < palabraIngresada.length()){
+            if(palabraIngresada.charAt(i) != palabraIngresada.charAt((palabraIngresada.length() - 1) - i)){
+               esPalindromo = false;
+               C3 = false;
+               break;  
+            }
+           i++;
+        }
+        
+        return C3; //Tercera Condicion
+    }
+    
+    public boolean comprobarCaracteres(String palabraIngresada){
+        
+        Pattern letras = Pattern.compile("([a|b])*");
+        Matcher cadenaValida = letras.matcher(txtCadena.getText());
+        if(cadenaValida.matches()) {
+            return true;
+        }else{
+            return false;
+        }  
+    }
+    
+    
+    
+    
 }
