@@ -174,8 +174,14 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
         Object evt = e.getSource();
         if(evt.equals(btnProbar)){
             palabraProbar = txtCadena.getText();
-            
+            boolean C1 = false; // Primera comprobación
+            String cadenaIngresada = txtCadena.getText();
+            C1 = comprobarCadenaPar(cadenaIngresada);
             System.out.println(palabraProbar);
         }
+    }
+    
+    public boolean comprobarCadenaPar(String palabraIngresada){
+        return palabraIngresada.length() % 2 == 0;
     }
 }
