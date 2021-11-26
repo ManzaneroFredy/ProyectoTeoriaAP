@@ -2,6 +2,8 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -223,5 +225,19 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
         
         return C3; //Tercera Condicion
     }
+    
+    public boolean comprobarCaracteres(String palabraIngresada){
+        
+        Pattern letras = Pattern.compile("([a|b])*");
+        Matcher cadenaValida = letras.matcher(txtCadena.getText());
+        if(cadenaValida.matches()) {
+            return true;
+        }else{
+            return false;
+        }  
+    }
+    
+    
+    
     
 }
