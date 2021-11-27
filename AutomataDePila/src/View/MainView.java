@@ -1,22 +1,30 @@
 package View;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.ListIterator;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class MainView extends javax.swing.JFrame implements ActionListener {
-    
+
     String palabraProbar = "";
+
     public MainView() {
         initComponents();
         DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
         btnProbar.addActionListener(this);
-        
-    }
 
+        //Seteamos el estatus de la cadena como desconocido
+        EstatusCadena.setText("Desconocida");
+        EstatusCadena.setForeground(Color.gray);
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -32,8 +40,9 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
         jLabel4 = new javax.swing.JLabel();
         txtCadena = new javax.swing.JTextField();
         btnProbar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        EstatusCadena = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        alertas_palabra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -89,9 +98,9 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 189, 119));
-        jLabel5.setText("Aceptada");
+        EstatusCadena.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        EstatusCadena.setForeground(new java.awt.Color(102, 189, 119));
+        EstatusCadena.setText("Aceptada");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel7.setText("Cadena:");
@@ -113,8 +122,10 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(diagramaAP)))
+                                .addComponent(EstatusCadena, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(alertas_palabra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(diagramaAP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(313, 313, 313)
                         .addComponent(jLabel3)
@@ -127,7 +138,7 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
                         .addComponent(txtCadena, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnProbar)))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,13 +155,15 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(diagramaAP)
+                        .addGap(29, 29, 29)
+                        .addComponent(alertas_palabra, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(EstatusCadena, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(pnlTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -163,30 +176,28 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_txtCadenaActionPerformed
 
     private void btnProbarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProbarActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
-        modelo.addRow(new Object[]{"s","abba",'\u0190'});
-    }//GEN-LAST:event_btnProbarActionPerformed
 
+    }//GEN-LAST:event_btnProbarActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainView().setVisible(true);
-                
-                
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel EstatusCadena;
     private javax.swing.JTable Tabla;
+    private javax.swing.JLabel alertas_palabra;
     private javax.swing.JButton btnProbar;
     private javax.swing.JLabel diagramaAP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlTabla;
@@ -195,49 +206,124 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
         Object evt = e.getSource();
-        if(evt.equals(btnProbar)){
-            palabraProbar = txtCadena.getText();
-            boolean C1 = false; // Primera comprobación
-            String cadenaIngresada = txtCadena.getText();
-            C1 = comprobarCadenaPar(cadenaIngresada);
-            System.out.println(palabraProbar);
+
+        if (modelo.getRowCount() > 0) {
+            modelo.setRowCount(0);
         }
+
+        if (evt.equals(btnProbar)) {
+            palabraProbar = txtCadena.getText();
+
+            //Verificamos las 2 condiciones antes de llamar a la funcion AutomataDePila
+            if (comprobarCadenaPar(palabraProbar) && comprobarCaracteres(palabraProbar)) {
+                alertas_palabra.setText("");
+                if (automataDePila(palabraProbar)) {
+                    EstatusCadena.setText("Aceptada");
+                    EstatusCadena.setForeground(Color.green);
+                } else {
+                    EstatusCadena.setText("No aceptada");
+                    EstatusCadena.setForeground(Color.red);
+                }
+            } else {
+
+                if (!comprobarCadenaPar(palabraProbar) && !comprobarCaracteres(palabraProbar)) {
+                    alertas_palabra.setText("La palabra no es par y contiene caracter fuera del lenguaje a,b");
+                    
+                } else if (!comprobarCaracteres(palabraProbar)) {
+                    alertas_palabra.setText("La palabra no contiene el lenguaje a,b");
+                } else if (!comprobarCadenaPar(palabraProbar) ){
+                    alertas_palabra.setText("La cadena no es par");
+                }
+                EstatusCadena.setText("Desconocida");
+                EstatusCadena.setForeground(Color.gray);
+            }
+        }
+
     }
-    
-    public boolean comprobarCadenaPar(String palabraIngresada){
+
+    public boolean automataDePila(String palabraIngresada) {
+        DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
+        //modelo.addRow(new Object[]{"s", "abba", '\u0190'});
+        boolean esPalindromo = true;
+        int i;
+        String estadoActual = "s";
+
+        Stack pila = new Stack();
+
+        //Comprobamos la primera mitad de la palabra
+        for (i = 0; i < palabraIngresada.length() / 2; i++) {
+            char caracter = palabraIngresada.charAt(i);
+
+//            if (i == 0) {
+//                modelo.addRow(new Object[]{estadoActual, palabraIngresada, '\u0190'});
+//            }
+            //System.out.println("Palabra "+ tempPalabra.substring(i));
+            modelo.addRow(new Object[]{estadoActual, palabraIngresada.substring(i), imprimirPila(pila)});
+            pila.push(caracter);
+        }
+
+        String palabrabakup = palabraIngresada.substring(palabraIngresada.length() / 2);
+        String pilabakup = imprimirPila(pila);
+
+        if (palabrabakup.equals(pilabakup)) {
+            modelo.addRow(new Object[]{estadoActual, palabrabakup, palabrabakup});
+            // System.out.println(palabraIngresada.substring(palabraIngresada.length()/2) + imprimirPila(pila));
+        }
+
+        //cambiamos de estado
+        estadoActual = "f";
+
+        //Comprobamos la segunda mitad de la palabra
+        for (i = palabraIngresada.length() / 2; i < palabraIngresada.length(); i++) {
+            char caracter = palabraIngresada.charAt(i);
+
+            modelo.addRow(new Object[]{estadoActual, palabraIngresada.substring(i), imprimirPila(pila)});
+            if (caracter == (Character) pila.peek()) {
+                pila.pop();
+            }
+        }
+
+        //Comprobacion final para determinar si es palindroma
+        if (palabraIngresada.endsWith(imprimirPila(pila))) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public boolean comprobarCadenaPar(String palabraIngresada) {
         return palabraIngresada.length() % 2 == 0;
     }
-    
-    public boolean automataDePila(String palabraIngresada){
-        boolean C3 = false;
-        boolean esPalindromo = true;
-        int i = 0;
-        
-        while(esPalindromo && i < palabraIngresada.length()){
-            if(palabraIngresada.charAt(i) != palabraIngresada.charAt((palabraIngresada.length() - 1) - i)){
-               esPalindromo = false;
-               C3 = false;
-               break;  
-            }
-           i++;
-        }
-        
-        return C3; //Tercera Condicion
-    }
-    
-    public boolean comprobarCaracteres(String palabraIngresada){
-        
+
+    public boolean comprobarCaracteres(String palabraIngresada) {
+
         Pattern letras = Pattern.compile("([a|b])*");
         Matcher cadenaValida = letras.matcher(txtCadena.getText());
-        if(cadenaValida.matches()) {
+        if (cadenaValida.matches()) {
             return true;
-        }else{
+        } else {
             return false;
-        }  
+        }
     }
-    
-    
-    
-    
+
+    public String imprimirPila(Stack<Character> stack) {
+        Stack pilabakup = stack;
+        // Si esta vacio
+        if (pilabakup.empty()) {
+            return "";
+        }
+        // Extraemos el item de arriba
+        String x = String.valueOf(pilabakup.peek());
+        //Borramos el ultimo elemento
+        pilabakup.pop();
+        //usamos recursividad para imprimir el resto del stack
+        String recursividad = imprimirPila(pilabakup);
+        pilabakup.push(x.charAt(0));
+        return x + recursividad;
+
+    }
+
 }

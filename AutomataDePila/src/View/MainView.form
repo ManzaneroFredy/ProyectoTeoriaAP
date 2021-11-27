@@ -38,9 +38,12 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel7" min="-2" pref="145" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" pref="205" max="-2" attributes="0"/>
+                              <Component id="EstatusCadena" min="-2" pref="236" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="diagramaAP" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="alertas_palabra" alignment="0" max="32767" attributes="0"/>
+                              <Component id="diagramaAP" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -58,7 +61,7 @@
                       <Component id="btnProbar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="148" max="32767" attributes="0"/>
+              <EmptySpace pref="120" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,13 +82,15 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="diagramaAP" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="alertas_palabra" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" pref="69" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="EstatusCadena" alignment="3" min="-2" pref="69" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="pnlTabla" min="-2" max="-2" attributes="0"/>
@@ -219,7 +224,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProbarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="EstatusCadena">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="36" style="1"/>
@@ -237,6 +242,8 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cadena:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="alertas_palabra">
     </Component>
   </SubComponents>
 </Form>
