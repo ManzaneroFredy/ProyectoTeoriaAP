@@ -3,12 +3,9 @@ package View;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.ListIterator;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MainView extends javax.swing.JFrame implements ActionListener {
@@ -104,6 +101,9 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel7.setText("Cadena:");
+
+        alertas_palabra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        alertas_palabra.setForeground(new java.awt.Color(255, 51, 51));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -214,12 +214,12 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
         }
 
         if (evt.equals(btnProbar)) {
-            palabraProbar = txtCadena.getText();
+             palabraProbar = txtCadena.getText();
 
             //Verificamos las 2 condiciones antes de llamar a la funcion AutomataDePila
             if (comprobarCadenaPar(palabraProbar) && comprobarCaracteres(palabraProbar)) {
                 alertas_palabra.setText("");
-                if (automataDePila(palabraProbar)) {
+                if (automataDePila(palabraProbar)){
                     EstatusCadena.setText("Aceptada");
                     EstatusCadena.setForeground(Color.green);
                 } else {
@@ -227,17 +227,21 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
                     EstatusCadena.setForeground(Color.red);
                 }
             } else {
-
                 if (!comprobarCadenaPar(palabraProbar) && !comprobarCaracteres(palabraProbar)) {
                     alertas_palabra.setText("La palabra no es par y contiene caracter fuera del lenguaje a,b");
+                    EstatusCadena.setText("No aceptada");
+                    EstatusCadena.setForeground(Color.red);
                     
                 } else if (!comprobarCaracteres(palabraProbar)) {
                     alertas_palabra.setText("La palabra no contiene el lenguaje a,b");
+                    EstatusCadena.setText("No aceptada");
+                    EstatusCadena.setForeground(Color.red);
                 } else if (!comprobarCadenaPar(palabraProbar) ){
                     alertas_palabra.setText("La cadena no es par");
+                    EstatusCadena.setText("No aceptada");
+                    EstatusCadena.setForeground(Color.red);
                 }
-                EstatusCadena.setText("Desconocida");
-                EstatusCadena.setForeground(Color.gray);
+                
             }
         }
 
@@ -251,17 +255,23 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
         String estadoActual = "s";
 
         Stack pila = new Stack();
-
+        
+        //porLeer se va a estar sobreescribiendo en cada ciclo
+        String porLeer = palabraIngresada;
+        
         //Comprobamos la primera mitad de la palabra
         for (i = 0; i < palabraIngresada.length() / 2; i++) {
+            //Imprimir la fila antes de agregar caracteres a la pila
+            modelo.addRow(new Object[]{estadoActual, porLeer, imprimirPila(pila)});
             char caracter = palabraIngresada.charAt(i);
-
+            porLeer = porLeer.substring(1);
 //            if (i == 0) {
 //                modelo.addRow(new Object[]{estadoActual, palabraIngresada, '\u0190'});
 //            }
             //System.out.println("Palabra "+ tempPalabra.substring(i));
-            modelo.addRow(new Object[]{estadoActual, palabraIngresada.substring(i), imprimirPila(pila)});
+            
             pila.push(caracter);
+           // modelo.addRow(new Object[]{estadoActual, porLeer, imprimirPila(pila)});
         }
 
         String palabrabakup = palabraIngresada.substring(palabraIngresada.length() / 2);
@@ -271,22 +281,32 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
             modelo.addRow(new Object[]{estadoActual, palabrabakup, palabrabakup});
             // System.out.println(palabraIngresada.substring(palabraIngresada.length()/2) + imprimirPila(pila));
         }
+        
 
         //cambiamos de estado
         estadoActual = "f";
 
         //Comprobamos la segunda mitad de la palabra
         for (i = palabraIngresada.length() / 2; i < palabraIngresada.length(); i++) {
+            modelo.addRow(new Object[]{estadoActual, porLeer, imprimirPila(pila)});
             char caracter = palabraIngresada.charAt(i);
-
-            modelo.addRow(new Object[]{estadoActual, palabraIngresada.substring(i), imprimirPila(pila)});
+            porLeer = porLeer.substring(1);
+            
             if (caracter == (Character) pila.peek()) {
                 pila.pop();
+            }else{
+                return false;
             }
+            //Permite imprimir la última fila con los espacios vacíos
+            if(porLeer.isEmpty()){
+                modelo.addRow(new Object[] {estadoActual, "" ,imprimirPila(pila)});
+            }
+            System.out.println(porLeer);
+            System.out.println("-");
         }
 
         //Comprobacion final para determinar si es palindroma
-        if (palabraIngresada.endsWith(imprimirPila(pila))) {
+        if (porLeer.isEmpty() && pila.empty()) {
             return true;
         } else {
             return false;
