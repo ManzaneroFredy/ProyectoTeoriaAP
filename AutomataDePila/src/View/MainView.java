@@ -214,7 +214,7 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
         }
 
         if (evt.equals(btnProbar)) {
-             palabraProbar = txtCadena.getText();
+             palabraProbar = txtCadena.getText().toLowerCase();
 
             //Verificamos las 2 condiciones antes de llamar a la funcion AutomataDePila
             if (comprobarCadenaPar(palabraProbar) && comprobarCaracteres(palabraProbar)) {
@@ -250,7 +250,7 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
     public boolean automataDePila(String palabraIngresada) {
         DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
         //modelo.addRow(new Object[]{"s", "abba", '\u0190'});
-        boolean esPalindromo = true;
+        
         int i;
         String estadoActual = "s";
 
@@ -287,6 +287,10 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
         estadoActual = "f";
 
         //Comprobamos la segunda mitad de la palabra
+        if(porLeer.isEmpty()){
+            modelo.addRow(new Object[]{estadoActual, porLeer, imprimirPila(pila)});
+        }
+        
         for (i = palabraIngresada.length() / 2; i < palabraIngresada.length(); i++) {
             modelo.addRow(new Object[]{estadoActual, porLeer, imprimirPila(pila)});
             char caracter = palabraIngresada.charAt(i);
@@ -300,6 +304,7 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
             //Permite imprimir la última fila con los espacios vacíos
             if(porLeer.isEmpty()){
                 modelo.addRow(new Object[] {estadoActual, "" ,imprimirPila(pila)});
+                
             }
             System.out.println(porLeer);
             System.out.println("-");
@@ -321,7 +326,7 @@ public class MainView extends javax.swing.JFrame implements ActionListener {
     public boolean comprobarCaracteres(String palabraIngresada) {
 
         Pattern letras = Pattern.compile("([a|b])*");
-        Matcher cadenaValida = letras.matcher(txtCadena.getText());
+        Matcher cadenaValida = letras.matcher(palabraIngresada);
         if (cadenaValida.matches()) {
             return true;
         } else {
